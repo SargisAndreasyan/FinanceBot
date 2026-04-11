@@ -1,3 +1,10 @@
+## Requirements
+
+- Python 3.11+
+- Docker
+- just
+- uv
+
 # 💰 Telegram Expense Tracker Bot
 
 A simple Telegram bot for tracking personal expenses with categories, history, and editing features.
