@@ -2,7 +2,6 @@ import asyncio
 import os
 from dotenv import load_dotenv
 from aiogram import Bot, Dispatcher
-
 from db import init_db
 from handlers import rout
 

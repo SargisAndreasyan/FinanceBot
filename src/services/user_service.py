@@ -5,13 +5,13 @@ class UserService:
     def __init__(self):
         self.repo = UserRepository()
 
-    def create_user(self, t_id)->str:
+    def create_user(self, t_id)->dict:
         if self.get_user(t_id) is None:
             self.repo.create(t_id=t_id)
-            return f"User {t_id} created successfully"
+            return {'user_id': t_id , 'answer': f'User {t_id} already exists'}
 
         else:
-            return f'User {t_id} already exists'
+            return {'user_id': t_id , 'answer': f'User {t_id} already exists'}
 
     def get_user(self, t_id: int):
         return self.repo.get_by_id(t_id=t_id)
