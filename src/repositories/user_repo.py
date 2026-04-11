@@ -1,12 +1,12 @@
 from db.session import SessionLocal
-from db.models import Template
+from db.models import User
 
-class TemplateRepository:
+class UserRepository:
 
-    def create(self, name: str):
+    def create(self):
         db = SessionLocal()
         try:
-            obj = Template(name=name)
+            obj = User()
             db.add(obj)
             db.commit()
             db.refresh(obj)
@@ -17,21 +17,21 @@ class TemplateRepository:
     def get_by_id(self, template_id: int):
         db = SessionLocal()
         try:
-            return db.query(Template).filter(Template.id == template_id).first()
+            return db.query(User).filter(User.id == template_id).first()
         finally:
             db.close()
 
     def get_all(self):
         db = SessionLocal()
         try:
-            return db.query(Template).all()
+            return db.query(User).all()
         finally:
             db.close()
 
     def delete(self, template_id: int):
         db = SessionLocal()
         try:
-            obj = db.query(Template).filter(Template.id == template_id).first()
+            obj = db.query(User).filter(User.id == template_id).first()
             if obj:
                 db.delete(obj)
                 db.commit()

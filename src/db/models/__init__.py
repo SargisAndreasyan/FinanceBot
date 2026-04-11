@@ -1,5 +1,4 @@
-from .template import Template
-
+from .users import User
 __all__ = [
-    'Template'
+    'User',
 ]

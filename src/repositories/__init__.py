@@ -1,3 +1,3 @@
-from repositories.template_repo import TemplateRepository
+from .user_repo import UserRepository
 
-__all__ = ["TemplateRepository"]
+__all__ = ["UserRepository"]

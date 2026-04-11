@@ -1,3 +1,3 @@
-from services.temp_service import TemplateService
+from .user_service import UserService
 
-__all__ = ["TemplateService"]
+__all__ = ["UserService"]
