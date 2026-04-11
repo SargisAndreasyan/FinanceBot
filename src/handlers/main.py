@@ -1,7 +1,9 @@
 from aiogram import Router, types
 from aiogram.filters import Command
 from services import UserService
+from .categories import ctg
 rout = Router()
+rout.include_router(ctg)
 
 @rout.message(Command('start'))
 async def start_handler(message: types.Message):
