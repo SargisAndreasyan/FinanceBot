@@ -11,4 +11,4 @@ RUN uv sync --frozen
 
 ENV PYTHONPATH=/app/src
 
-CMD ["python", "src/app.py"]
+CMD ["uv", "run", "src/app.py"]

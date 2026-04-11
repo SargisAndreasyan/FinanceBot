@@ -14,13 +14,14 @@ dp = Dispatcher()
 
 @dp.message(CommandStart())
 async def start(message: Message):
-    await message.answer('Первое сообщение')
+    await message.answer('First message')
 
 
 async def main():
+    print('bot started')
     await bot.delete_webhook(drop_pending_updates=True)
     await dp.start_polling(bot)
-
+    print('bot finished')
 
 if __name__ == '__main__':
     asyncio.run(main())
