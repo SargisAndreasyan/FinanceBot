@@ -3,7 +3,7 @@ from sqlalchemy.orm import sessionmaker
 
 engine = create_engine(
     "sqlite:///finance.db",
-    echo=True,
+    echo=False,
     future=True,
 )
 

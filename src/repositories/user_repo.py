@@ -1,41 +1,42 @@
 from db.session import SessionLocal
+from core.response import Response
 from db.models import User
+from repositories.base import BaseRepository
 
-class UserRepository:
 
-    def create(self,t_id):
+class UserRepository(BaseRepository):
+    model = User
+
+    def create_user(self, t_id: int) -> Response:
         db = SessionLocal()
         try:
-            obj = User(t_id=t_id)
-            db.add(obj)
-            db.add(obj)
+            user = User(t_id=t_id)
+            db.add(user)
             db.commit()
-            db.refresh(obj)
-            return obj
+            db.refresh(user)
+            return Response.ok(self._to_dict(user))
+
+        except Exception as e:
+            db.rollback()
+            return Response.fail(str(e))
+
         finally:
             db.close()
 
-    def get_by_id(self, t_id: int):
+    def get_by_t_id(self, t_id: int) -> Response:
         db = SessionLocal()
         try:
-            return db.query(User).filter(User.t_id == t_id).first()
-        finally:
-            db.close()
+            user = db.query(User).filter(
+                User.t_id == t_id
+            ).first()
 
-    def get_all(self):
-        db = SessionLocal()
-        try:
-            return db.query(User).all()
-        finally:
-            db.close()
+            if not user:
+                return Response.fail("not_found")
 
-    def delete(self, t_id: int):
-        db = SessionLocal()
-        try:
-            obj = db.query(User).filter(User.id == t_id).first()
-            if obj:
-                db.delete(obj)
-                db.commit()
-            return obj
+            return Response.ok(self._to_dict(user))
+
+        except Exception as e:
+            return Response.fail(str(e))
+
         finally:
             db.close()
