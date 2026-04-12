@@ -45,3 +45,23 @@ class CategoryService:
 
         finally:
             db.close()
+
+    def edit_category(self, old_name: str, new_name: str) -> str:
+        if not self.user_service.get_user(self.t_id).success:
+            return "User not found"
+
+        old_name = old_name.strip().lower()
+        new_name = new_name.strip().lower()
+
+        if not self.repo.get_by_name(self.t_id, old_name).success:
+            return "Category not found"
+
+        if self.repo.get_by_name(self.t_id, new_name).success:
+            return "New category already exists"
+
+        result = self.repo.update_name(self.t_id, old_name, new_name)
+
+        if result.success:
+            return f"{old_name} category renamed to {new_name}"
+
+        return "Error updating category"
